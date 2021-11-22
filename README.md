@@ -5,16 +5,16 @@
 
 パッケージ名を設定しましょう。 ドメインを逆さにするのが定石になります。もしも自分のドメインを持っていない時は GitHub のアカウントを使いましょう。
 
-### [Main.kt](src/main/java/sample/Main.java)
+### [Main.kt](src/main/kotlin/sample/Main.kt)
 
-```java
-package sample; // TODO 固有のパッケージ名を設定する
+```kotlin
+package sample // TODO 固有のパッケージ名を設定する
 ```
 
 > e.g. GitHub のユーザー名が `abcdef` で、作るプラグインの名前が `Sample` だったら
 >
-> ```java
-> package com.github.abcdef.sample;
+> ```kotlin
+> package com.github.abcdef.sample
 > ```
 
 ### [build.gradle.kts](build.gradle.kts)
@@ -55,3 +55,7 @@ configure<BukkitPluginDescription> {
 ### テストサーバーの起動 `buildAndLaunchServer`
 
 `:25565` でテストサーバーを起動します。
+
+### コードのフォーマット `formatKotlin`
+
+ソースコードを自動で綺麗にします。

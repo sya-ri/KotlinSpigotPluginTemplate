@@ -1,14 +1,17 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import dev.s7a.gradle.minecraft.server.tasks.LaunchMinecraftServerTask
 import dev.s7a.gradle.minecraft.server.tasks.LaunchMinecraftServerTask.JarUrl
 import groovy.lang.Closure
 import net.minecrell.pluginyml.bukkit.BukkitPluginDescription
 
 plugins {
-    java
+    kotlin("jvm") version "1.6.0"
     id("net.minecrell.plugin-yml.bukkit") version "0.5.0"
     id("com.github.ben-manes.versions") version "0.39.0"
     id("com.palantir.git-version") version "0.12.3"
     id("dev.s7a.gradle.minecraft.server") version "1.1.0"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("org.jmailen.kotlinter") version "3.7.0"
 }
 
 val gitVersion: Closure<String> by extra
@@ -19,15 +22,28 @@ repositories {
     mavenCentral()
 }
 
+val shadowImplementation: Configuration by configurations.creating
+configurations["implementation"].extendsFrom(shadowImplementation)
+
 dependencies {
+    shadowImplementation(kotlin("stdlib"))
     implementation("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
-    implementation("org.jetbrains:annotations:23.0.0")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 configure<BukkitPluginDescription> {
     main = "sample.Main" // TODO JavaPlugin を継承したクラスとパッケージを入力する
     version = gitVersion()
     apiVersion = "1.17"
+}
+
+tasks.withType<ShadowJar> {
+    configurations = listOf(shadowImplementation)
+    archiveClassifier.set("")
+}
+
+tasks.named("build") {
+    dependsOn("shadowJar")
 }
 
 task<LaunchMinecraftServerTask>("buildAndLaunchServer") {
