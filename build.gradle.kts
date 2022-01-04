@@ -26,7 +26,7 @@ val shadowImplementation: Configuration by configurations.creating
 configurations["implementation"].extendsFrom(shadowImplementation)
 
 dependencies {
-    shadowImplementation(kotlin("stdlib-jdk8"))
+    shadowImplementation(kotlin("stdlib"))
     implementation("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
 }
 
