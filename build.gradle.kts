@@ -25,15 +25,17 @@ repositories {
 val shadowImplementation: Configuration by configurations.creating
 configurations["implementation"].extendsFrom(shadowImplementation)
 
+val pluginVersion = "1.18.1" // TODO 好きなバージョンに変更する (例: 1.17.1)
+
 dependencies {
     shadowImplementation(kotlin("stdlib"))
-    implementation("org.spigotmc:spigot-api:1.17.1-R0.1-SNAPSHOT")
+    implementation("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
 }
 
 configure<BukkitPluginDescription> {
     main = "sample.Main" // TODO JavaPlugin を継承したクラスとパッケージを入力する
     version = gitVersion()
-    apiVersion = "1.17"
+    apiVersion = "1." + pluginVersion.split(".")[1]
 }
 
 tasks.withType<ShadowJar> {
@@ -54,7 +56,7 @@ task<LaunchMinecraftServerTask>("buildAndLaunchServer") {
         }
     }
 
-    jarUrl.set(JarUrl.Paper("1.17.1"))
+    jarUrl.set(JarUrl.Paper(pluginVersion))
     jarName.set("server.jar")
     serverDirectory.set(buildDir.resolve("MinecraftServer"))
     nogui.set(true)
