@@ -16,6 +16,8 @@ plugins {
 
 val gitVersion: Closure<String> by extra
 
+val pluginVersion: String by project.ext
+
 repositories {
     maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven(url = "https://oss.sonatype.org/content/groups/public/")
@@ -24,8 +26,6 @@ repositories {
 
 val shadowImplementation: Configuration by configurations.creating
 configurations["implementation"].extendsFrom(shadowImplementation)
-
-val pluginVersion = "1.18.1" // TODO 好きなバージョンに変更する (例: 1.17.1)
 
 dependencies {
     shadowImplementation(kotlin("stdlib"))
