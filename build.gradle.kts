@@ -29,7 +29,7 @@ configurations["implementation"].extendsFrom(shadowImplementation)
 
 dependencies {
     shadowImplementation(kotlin("stdlib"))
-    implementation("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:$pluginVersion-R0.1-SNAPSHOT")
 }
 
 configure<BukkitPluginDescription> {
