@@ -23,7 +23,7 @@ open class SetupTask : DefaultTask() {
         val rawAccount = "/?([^/]*)/?".toRegex().find(uri.path)?.groupValues?.get(1) ?: error("アカウント名が見つかりませんでした (${uri.path})")
         val account = rawAccount.replace('-', '_')
         val groupId = "com.github.$account"
-        val srcDir = projectDir.resolve("src/main/java/com/github/$account").apply(File::mkdirs)
+        val srcDir = projectDir.resolve("src/main/kotlin/com/github/$account").apply(File::mkdirs)
         srcDir.resolve("Main.kt").writeText(
             """
                 package $groupId
