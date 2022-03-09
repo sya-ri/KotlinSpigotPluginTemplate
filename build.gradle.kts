@@ -19,9 +19,9 @@ val gitVersion: Closure<String> by extra
 val pluginVersion: String by project.ext
 
 repositories {
+    mavenCentral()
     maven(url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
     maven(url = "https://oss.sonatype.org/content/groups/public/")
-    mavenCentral()
 }
 
 val shadowImplementation: Configuration by configurations.creating
